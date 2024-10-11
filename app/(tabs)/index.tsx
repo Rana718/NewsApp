@@ -6,6 +6,7 @@ import SearchBar from "@/components/SearchBar";
 import axios from "axios";
 import { NewsDataType } from "@/types";
 import BreakingNews from "@/components/BreakingNews";
+import Categories from "@/components/Categories";
 
 type Props = {};
 
@@ -33,6 +34,8 @@ export default function Page({}: Props) {
         }
     }
 
+    
+
     return(
         <View className="flex-1 " style={{ paddingTop: safeTop }}>
             <Header/>
@@ -42,7 +45,7 @@ export default function Page({}: Props) {
             ): (
                 <BreakingNews newsList={breakingNews}/>
             )}
-            
+            <Categories/>
         </View>
     )
 }
