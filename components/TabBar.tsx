@@ -27,7 +27,7 @@ export default function TabBar({ state, descriptors, navigation }: BottomTabBarP
 
 
     return (
-        <View onLayout={onTabbarLayout} className="flex-row pt-4 pb-10 bg-white">
+        <View onLayout={onTabbarLayout} className="flex-row pt-2 pb-3 bg-white">
             <Animated.View
                 style={[
                     animatedStyle,

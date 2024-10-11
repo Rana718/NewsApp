@@ -2,9 +2,11 @@ import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import React, { useRef } from "react";
 import newsCategoryList from "@/constants/Categories";
 
-type Props = {};
+type Props = {
+    onCatgorySelect: (category: string) => void;
+};
 
-export default function Categories({}: Props) {
+export default function Categories({onCatgorySelect}: Props) {
     const scrollRef = useRef<ScrollView>(null);
     const itemRef = useRef<TouchableOpacity[] | null[]>([]);
     const [activeIndex, setActiveIndex] = React.useState(0);
@@ -23,6 +25,7 @@ export default function Categories({}: Props) {
                 });
             }
         );
+        onCatgorySelect(newsCategoryList[index].slug);
     };
 
     return (
@@ -32,7 +35,7 @@ export default function Categories({}: Props) {
             </Text>
 
             <ScrollView
-                className="px-3 gap-3 mb-2"
+                className="px-3 gap-3"
                 ref={scrollRef}
                 horizontal
                 showsHorizontalScrollIndicator={false}

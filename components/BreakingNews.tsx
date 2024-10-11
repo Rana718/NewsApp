@@ -65,7 +65,7 @@ export default function BreakingNews({ newsList }: Props) {
 
 
     return (
-        <View className="mb-5">
+        <View className="mb-2">
             <Text className="text-xl font-semibold text-black mb-3 ml-5">Breaking News</Text>
             <View className="justify-center">
                 <Animated.FlatList
