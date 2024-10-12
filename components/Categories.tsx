@@ -1,5 +1,5 @@
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import newsCategoryList from "@/constants/Categories";
 
 type Props = {
@@ -10,6 +10,10 @@ export default function Categories({onCatgorySelect}: Props) {
     const scrollRef = useRef<ScrollView>(null);
     const itemRef = useRef<TouchableOpacity[] | null[]>([]);
     const [activeIndex, setActiveIndex] = React.useState(0);
+
+    useEffect(()=>{
+        onCatgorySelect(newsCategoryList[0].slug);
+    }, []);
 
     const handleSelectCategory = (index: number) => {
         const selected = itemRef.current[index];
