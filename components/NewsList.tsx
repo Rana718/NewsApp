@@ -1,8 +1,9 @@
-import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { ScrollView, TouchableOpacity } from "react-native";
 import React from "react";
 import { NewsDataType } from "@/types";
 import Loading from "./Loading";
 import { Link } from "expo-router";
+import NewsItem from "./NewsItem";
 
 type Props = {
     newsList: Array<NewsDataType>
@@ -16,28 +17,7 @@ export default function NawsList({ newsList }: Props) {
                     {newsList.map((item, index) => (
                         <Link href={`/newsde/${item.article_id}`} asChild key={index}>
                             <TouchableOpacity>
-                                <View  className="flex-1 flex-row items-center mb-5 gap-[10px]">
-
-                                    <Image className="w-[90px] h-[100px] rounded-2xl" source={{ uri: item.image_url }} />
-
-                                    <View className="flex-1 gap-[5px] justify-center">
-
-                                        <Text className="text-xs text-darkGrey capitalize">
-                                            {item.category}
-                                        </Text>
-
-                                        <Text numberOfLines={2} className="text-black font-semibold">
-                                            {item.title}
-                                        </Text>
-                                        <View className="flex-row items-center gap-[5px]">
-                                            <Image className="w-4 h-4 rounded-full" source={{ uri: item.source_icon }} />
-                                            <Text className="text-[12px] font-normal text-darkGrey">
-                                                {item.source_name}
-                                            </Text>
-                                        </View>
-
-                                    </View>
-                                </View>
+                                <NewsItem item={item}/>
                             </TouchableOpacity>
                         </Link>
 

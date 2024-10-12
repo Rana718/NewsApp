@@ -17,6 +17,7 @@ export default function Page({}: Props) {
     const [isLoading, setIsLoading] = useState(true);
     const [breakingNews, setBreakingNews] = useState<NewsDataType[]>([]);
     const [news, setNews] = useState<NewsDataType[]>([]);
+    const [search, setSearch] = useState('');
 
     useEffect(()=>{
         getBreakingNews();
@@ -64,7 +65,7 @@ export default function Page({}: Props) {
         <ScrollView className="flex-1 " style={{ paddingTop: safeTop }}>
             <Header/>
 
-            <SearchBar/>
+            <SearchBar setSearchQuery={setSearch}/>
 
             {isLoading ?(
                 <Loading size={"large"}/>
