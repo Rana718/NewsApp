@@ -4,10 +4,11 @@ import { useNavigation } from "@react-navigation/native";
 import { useRouter } from "expo-router";
 import CustomButton from "@/components/CustomButton";
 import AntDesign from '@expo/vector-icons/AntDesign';
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "@/FirebaseConfig";
+import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { auth, db } from "@/FirebaseConfig";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
+import { doc, setDoc } from "firebase/firestore";
 
 
 
@@ -43,6 +44,29 @@ export default function SignIn() {
                 ToastAndroid.show(errorMessage, ToastAndroid.BOTTOM);
             });
 
+    }
+
+    const googleLogin = () => {
+    //    const provider = new GoogleAuthProvider();
+    //     try{
+    //         signInWithPopup(auth, provider).then(async (res) =>{
+    //             const user = res.user;
+    //             if (res.user){
+    //                 await setDoc(doc(db, "users", user.uid),{
+    //                     email: user.email,
+    //                     name: user.displayName,
+    //                     photoURL: user.photoURL,
+    //                 });
+    //                 ToastAndroid.show("user created", ToastAndroid.BOTTOM);
+    //             }
+    //             router.replace('/(tabs)');
+    //         });
+
+    //     }catch(e){
+    //         console.log(e);
+    //         ToastAndroid.show("something went wrong", ToastAndroid.BOTTOM);
+    //     }
+        ToastAndroid.show("Comming soon", ToastAndroid.BOTTOM);
     }
 
     return (
@@ -118,7 +142,7 @@ export default function SignIn() {
                     <View>
                         <TouchableOpacity 
                             className="flex-row items-center justify-center space-x-4 mt-4 bg-tint rounded-full py-4"
-                            onPress={() => console.log("google")}
+                            onPress={() => googleLogin()}
                         >
                             <AntDesign name="google" size={24} color="black" />
                             <Text>

@@ -1,13 +1,14 @@
 import { View, Text, TextInput, TouchableOpacity, ToastAndroid, ScrollView } from "react-native";
 import React, { useEffect, useState } from "react";
-import { Redirect, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 import { useNavigation } from "expo-router";
 import AntDesign from '@expo/vector-icons/AntDesign';
 import CustomButton from "@/components/CustomButton";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "@/FirebaseConfig";
+import { auth, db } from "@/FirebaseConfig";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
+import { doc, setDoc } from "firebase/firestore";
 
 
 export default function SignUp() {
@@ -17,6 +18,7 @@ export default function SignUp() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    
 
     useEffect(() => {
         navigation.setOptions({
@@ -24,46 +26,45 @@ export default function SignUp() {
         });
     }, []);
 
-    const handleSignUp = () => {
-        if (!name && !email && !password) {
+    const handleSignUp = async () => {
+        if (!name || !email || !password) {
             ToastAndroid.show('Please enter all fields', ToastAndroid.BOTTOM);
             return;
         }
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
+        try {
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
 
-                ToastAndroid.show('Sign Up Successful!', ToastAndroid.BOTTOM);
-                router.replace('/(tabs)');
-
-            })
-            .catch((error: any) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                ToastAndroid.show(`Error: ${errorMessage}`, ToastAndroid.BOTTOM);
-
-            });
-    }
-
+            if (user) {
+                await setDoc(doc(db, "users", user.uid), {
+                    email: user.email,
+                    name: name,
+                    photo: ""
+                });
+                ToastAndroid.show('Account created successfully', ToastAndroid.BOTTOM);
+                router.replace("/(tabs)");
+            }
+        } catch (e: any) {
+            ToastAndroid.show(e.message, ToastAndroid.BOTTOM);
+        }
+    };
 
     return (
         <>
             <StatusBar style="dark" />
             <View className="flex-1 px-6 bg-white" style={{ paddingTop: safetop }}>
                 <TouchableOpacity onPress={() => router.back()}>
-
                     <AntDesign name="arrowleft" size={32} color="black" />
                 </TouchableOpacity>
                 <ScrollView showsVerticalScrollIndicator={false}>
-
                     <Text className="text-left text-4xl font-bold text-blue-600 pt-3">
                         Create New Account
                     </Text>
 
                     <View className="mt-10">
-
-                        <Text className="text-gray-700 text-lg mb-2">FullName</Text>
+                        <Text className="text-gray-700 text-lg mb-2">Full Name</Text>
                         <TextInput
-                            placeholder="Enter your email"
+                            placeholder="Enter your name"
                             value={name}
                             onChangeText={setName}
                             className="border border-gray-300 rounded-lg px-4 py-3 text-base text-gray-700 bg-gray-100"
@@ -75,8 +76,9 @@ export default function SignUp() {
                             value={email}
                             onChangeText={setEmail}
                             className="border border-gray-300 rounded-lg px-4 py-3 text-base text-gray-700 bg-gray-100"
+                            keyboardType="email-address"
+                            autoCapitalize="none"
                         />
-
 
                         <Text className="text-gray-700 text-lg mt-6 mb-2">Password</Text>
                         <TextInput
@@ -105,8 +107,7 @@ export default function SignUp() {
                         />
                     </View>
                 </ScrollView>
-
             </View>
         </>
-    )
+    );
 }
