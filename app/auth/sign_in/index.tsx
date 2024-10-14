@@ -9,6 +9,8 @@ import { auth, db } from "@/FirebaseConfig";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import { doc, setDoc } from "firebase/firestore";
+import Loading from "@/components/Loading";
+import { Colors } from "@/constants/Colors";
 
 
 
@@ -18,6 +20,7 @@ export default function SignIn() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const router = useRouter();
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         navigation.setOptions({
@@ -30,19 +33,20 @@ export default function SignIn() {
             ToastAndroid.show('Please enter all fields', ToastAndroid.BOTTOM);
             return;
         }
-
+        setIsLoading(true);
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
 
                 ToastAndroid.show('Sign Up Successful!', ToastAndroid.BOTTOM);
+                setIsLoading(false);
                 router.replace('/(tabs)');
 
             })
             .catch((error: any) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                ToastAndroid.show(errorMessage, ToastAndroid.BOTTOM);
+                setIsLoading(false);
+                ToastAndroid.show(error.message, ToastAndroid.BOTTOM);
             });
+        
 
     }
 
@@ -154,6 +158,23 @@ export default function SignIn() {
                 </ScrollView>
 
             </View>
+
+            {isLoading && (
+                <View style={{
+                    position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        zIndex: 1
+                }}>
+                    <Loading size={"large"} color={Colors.tint}/>
+
+                </View>
+            )}
         </>
     )
 }
