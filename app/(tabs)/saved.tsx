@@ -10,21 +10,21 @@ import { useIsFocused } from "@react-navigation/native";
 
 type Props = {};
 
-export default function Saved({}: Props) {
+export default function Saved({ }: Props) {
     const [bookmarkNews, setBookmarkedNews] = useState([])
     const [isLoading, setIsLoading] = useState(true);
     const isFocused = useIsFocused();
 
-    useEffect(()=>{
+    useEffect(() => {
         fetchBookmark();
-    },[isFocused])
+    }, [isFocused])
 
     const fetchBookmark = async () => {
         try {
             setIsLoading(true);
             const token = await AsyncStorage.getItem("bookmark");
             const res = token ? JSON.parse(token) : null;
-            
+
             if (res) {
                 let query_string = res.join(',');
                 const URL = `https://newsdata.io/api/1/news?apikey=${process.env.EXPO_PUBLIC_API_KEY}&id=${query_string}`;
@@ -40,18 +40,24 @@ export default function Saved({}: Props) {
             setIsLoading(false);
         }
     };
-    
 
-    return(
+
+    return (
         <>
             <Stack.Screen options={{
                 headerShown: true,
-            }}/>
+            }} />
+
+            {bookmarkNews.length === 0 && !isLoading && (
+                <View className="flex-1 justify-start items-center mt-6">
+                    <Text className="text-gray-700 font-bold text-xl">No bookmarked news</Text>
+                </View>
+            )}
 
             <View className="flex-1 m-5">
                 {isLoading ? (
-                    <Loading size={"large"}/>
-                ): (
+                    <Loading size={"large"} />
+                ) : (
                     <Animated.FlatList
                         data={bookmarkNews}
                         keyExtractor={(_, index) => `list_items${index}`}
