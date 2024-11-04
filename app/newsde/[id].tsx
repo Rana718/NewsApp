@@ -107,7 +107,7 @@ export default function NewsDetails({}: Props) {
               />
             </TouchableOpacity>
           ),
-          title: "",
+          title: "News Details"
         }}
       />
       {isLoading ? (

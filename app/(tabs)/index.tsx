@@ -65,7 +65,7 @@ export default function Page({}: Props) {
         <ScrollView className="flex-1 " style={{ paddingTop: safeTop }}>
             <Header/>
 
-            <SearchBar setSearchQuery={setSearch}/>
+            <SearchBar setSearchQuery={setSearch} EnableButton={true}/>
 
             {isLoading ?(
                 <Loading size={"large"}/>
