@@ -4,11 +4,11 @@
     "slug": "newsapp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/app_icon.png",
+    "icon": "./assets/icon_app.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/icon_app.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -18,7 +18,7 @@
     "android": {
       "jsEngine": "hermes",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/icon_app.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.godx_rex.newsapp"
@@ -26,7 +26,7 @@
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/icon_app.png"
     },
     "plugins": [
       "expo-router"
