@@ -4,11 +4,10 @@ import { useNavigation } from "@react-navigation/native";
 import { useRouter } from "expo-router";
 import CustomButton from "@/components/CustomButton";
 import AntDesign from '@expo/vector-icons/AntDesign';
-import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-import { auth, db } from "@/FirebaseConfig";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/FirebaseConfig";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
-import { doc, setDoc } from "firebase/firestore";
 import Loading from "@/components/Loading";
 import { Colors } from "@/constants/Colors";
 

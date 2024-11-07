@@ -63,7 +63,9 @@ export default function SignUp() {
                 await setDoc(doc(db, "users", user.uid), {
                     email: user.email,
                     name: name,
-                    photoURL: photoURL
+                    photoURL: photoURL,
+                    provider: 'firebase',
+                    createdAt: new Date(),
                 });
                 setIsLoading(false);
                 ToastAndroid.show('Account created successfully', ToastAndroid.BOTTOM);
