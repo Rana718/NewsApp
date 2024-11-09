@@ -39,7 +39,7 @@ export default function Categories({onCatgorySelect}: Props) {
             </Text>
 
             <ScrollView
-                className="px-3 gap-3"
+                className="px-3"
                 ref={scrollRef}
                 horizontal
                 showsHorizontalScrollIndicator={false}
@@ -50,7 +50,7 @@ export default function Categories({onCatgorySelect}: Props) {
                         key={index}
                         onPress={() => handleSelectCategory(index)}
                         ref={(el) => (itemRef.current[index] = el)}
-                        className={`py-2 px-3 rounded-full ${activeIndex === index ? 'bg-tint' : 'border border-gray-600'}`}
+                        className={`py-2 px-3 mr-2 rounded-2xl ${activeIndex === index ? 'bg-tint' : 'border border-gray-600'}`}
                     >
                         <Text
                             className={`text-[14px] ${

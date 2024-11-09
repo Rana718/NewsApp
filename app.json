@@ -17,6 +17,7 @@
     },
     "android": {
       "jsEngine": "hermes",
+      "permissions": ["INTERNET"],
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon_app.png",
         "backgroundColor": "#ffffff"

@@ -76,6 +76,7 @@ export default function BreakingNews({ newsList }: Props) {
                         <SliderItem slideItem={item} index={index} scrollX={scrollX}/>
                     )}
                     horizontal
+                    pagingEnabled
                     showsHorizontalScrollIndicator={false}
                     onScroll={onScrollHandler}
                     scrollEventThrottle={16}
