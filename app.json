@@ -2,14 +2,14 @@
   "expo": {
     "name": "newsapp",
     "slug": "newsapp",
-    "version": "1.0.0",
+    "version": "1.2.0",
     "orientation": "portrait",
     "icon": "./assets/icon_app.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/icon_app.png",
-      "resizeMode": "contain",
+      "image": "./assets/images/splash.png",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "ios": {
@@ -17,7 +17,12 @@
     },
     "android": {
       "jsEngine": "hermes",
-      "permissions": ["INTERNET"],
+      "permissions": [
+        "INTERNET",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "CAMERA"
+      ],
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon_app.png",
         "backgroundColor": "#ffffff"
