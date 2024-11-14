@@ -26,7 +26,7 @@ export default function Discover({ }: Props) {
             <Text className="text-xl font-bold mb-2 ml-3">
                 Categories
             </Text>
-            <View className="flex-row flex-wrap gap-4 mt-1 mx-1 mb-5">
+            <View className="flex-row flex-wrap gap-1 mt-1 mx-1 mb-5">
                 {categories.map((category) => (
                     <CheckBox
                         key={category.id} label={category.title} checked={category.selected}
@@ -39,7 +39,7 @@ export default function Discover({ }: Props) {
             <Text className="text-xl font-bold mb-2 ml-3">
                 Country
             </Text>
-            <View className="flex-row flex-wrap gap-4 mt-1 mx-1 mb-5">
+            <View className="flex-row flex-wrap gap-1 mt-1 mx-1 mb-5">
                 {country.map((item, index) => (
                     <CheckBox key={index} label={item.name} checked={item.selected}
                         onPress={() => { toggleCountry(index); setSelectedCountry(item.name) }}
